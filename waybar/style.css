@@ -1,0 +1,12 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: SF Mono;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.5);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}

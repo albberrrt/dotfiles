@@ -1,0 +1,87 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 23,
+
+  "modules-left": [
+    "custom/power",
+    "network"
+  ],
+  "modules-right": [
+    "custom/volume",
+    "backlight", 
+    "volume", 
+    "battery", 
+    "clock"
+  ],
+
+  // --- Clock --------------------------------
+  "clock": {
+  "tooltip-format": "{calendar}",
+  "format-alt": "[ {:%a %b %d %I:%M %p} ]",
+  "format": "[ {:%I:%M %p} ]"
+  },
+
+  // --- Network ------------------------------
+  "network": {
+    "format-wifi": " [ {icon}{signalStrength}% ] ",
+    "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+    "format-ethernet": "[ 󰀂 cable ]",
+    "format-alt": "[ 󱛇 ! ]",
+    "format-disconnected": "[ 󰖪 ! ]",
+    "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 5,
+    "nospacing": 1
+  },
+
+  // ── Battery ──────────────────────────────────────────────────────
+  "battery": {
+    "format": " [ {icon} {capacity}% ] ",
+    "format-icons": {
+      "charging": [
+        "󰢜","󰂆","󰂇","󰂈","󰢝","󰂉","󰢞","󰂊","󰂋","󰂅"
+      ],
+      "default": [
+        "󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"
+      ]
+    },
+    "format-full": "Charged ",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "tooltip": true
+  },
+
+  // --- Volume ------------------------------------------------------
+  "custom/volume": {
+    "exec": "~/.config/waybar/scripts/volume.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+  },
+
+  // --- Backlight / Brightness --------------------------------------
+  "backlight": {
+    "format": "[ 󰛨  {percent}% ]",
+    "format-icons": ["󰃞","󰃟","󰃠","󰃝","󰃜","󰃛"],
+    "class": "flicker-bar",
+    "on-click": "~/.config/waybar/scripts/brightness-toggle.sh",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+// ── Power ────────────────────────────────────────────────────────
+  "custom/power": {
+    "format": "[ 󰤆 ]",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "~/.config/waybar/scripts/powermenu.sh"
+  },
+
+}
